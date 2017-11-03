@@ -5,8 +5,8 @@
 2. 适用于移动端
 
 ## Example
-1. [在线demo](https://soluteli.github.io/rc-bscroll/)   
-2. [demo源码](examples/pages)  
+1. [demo](https://soluteli.github.io/react-bscroll/)   
+2. [源码](examples/pages)  
 
 ## Install
 ```
@@ -53,10 +53,10 @@ render () {
 | scrollY | Boolean | true | 默认允许Y轴滚动 |
 | scrollX | Boolean | false | 默认阻止X轴滚动 |
 | scrollbar | Boolean | false | 默认显示滚动条，有fade消失的效果（默认值也可以设置为Obeject，*暂未实现*） |  
-| pullDownRefresh | Boolean or Object | Object | 这个配置用于做下拉刷新功能，当设置 Object 的时，可以配置更多的具体细节。[demo](https://soluteli.github.io/rc-bscroll/#/vertical-scroll)，无此需求时请设置为false | 
-| pullUpLoad | Boolean or Object | Obejct | 这个配置用于做上拉加载功能，若为Object时可以配置一些具体的参数，[demo](https://soluteli.github.io/rc-bscroll/#/vertical-scroll)，无此需求时请设置为false | 
-| pullUpLoadMoreData | Function | null | 上拉加载时触发的异步加载数据的方法,需要返回一个resolved状态的Promise来刷新BetterScroll,[demo](https://soluteli.github.io/rc-bscroll/#/vertical-scroll)| 
-| doPullDownFresh | Function | null | 下拉加载时的回调函数,需要返回一个resolved状态的Promise来刷新BetterScroll。[demo](https://soluteli.github.io/rc-bscroll/#/vertical-scroll)| 
+| pullDownRefresh | Boolean or Object | Object | 这个配置用于做下拉刷新功能，当设置 Object 的时，可以配置更多的具体细节。[demo](https://soluteli.github.io/react-bscroll/#/vertical-scroll)，无此需求时请设置为false | 
+| pullUpLoad | Boolean or Object | Obejct | 这个配置用于做上拉加载功能，若为Object时可以配置一些具体的参数，[demo](https://soluteli.github.io/react-bscroll/#/vertical-scroll)，无此需求时请设置为false | 
+| pullUpLoadMoreData | Function | null | 上拉加载时触发的异步加载数据的方法,需要返回一个resolved状态的Promise来刷新BetterScroll,[demo](https://soluteli.github.io/react-bscroll/#/vertical-scroll)| 
+| doPullDownFresh | Function | null | 下拉加载时的回调函数,需要返回一个resolved状态的Promise来刷新BetterScroll。[demo](https://soluteli.github.io/react-bscroll/#/vertical-scroll)| 
 | doScroll | Function | null | 滚动时的触发回调函数 | 
 | doScrollStart | Function | null | 滚动开始时的触发事件 | 
 | doScrollEnd | Function | null | 滚动结束时的操作 | 

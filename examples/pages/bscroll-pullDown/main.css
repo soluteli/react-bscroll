@@ -1,0 +1,20 @@
+.container {
+    position: relative;
+    height: 400px;
+    background: rgba(0,0,0,.3);
+    border: 1px solid #000;
+}
+
+.content {
+    /*width: 200%;*/
+    position: relative;
+    margin: 0;
+}
+
+.content-item {
+    height: 60px;
+    line-height: 60px;
+    font-size: 18px;
+    padding-left: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}

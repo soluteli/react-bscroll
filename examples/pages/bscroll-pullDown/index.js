@@ -8,7 +8,7 @@ let NEWTOPDATAINDEX1 = 1
 for (let i = 0; i < 10; i++) {
   Data.push(i)
 }
-class VerticalScrollPage extends Component {
+class PullDownScrollPage extends Component {
   constructor (props, context) {
     super(props, context)
 
@@ -25,9 +25,13 @@ class VerticalScrollPage extends Component {
   componentDidMount () {
   }
 
+  componentWillUnmount () {
+    clearTimeout(this.timer)
+  }
+
   pullDownFreshAction = () => {
     return new Promise((resolve) => {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         if (Math.random() > 0) {
           // 如果有新数据
           let newPage = []
@@ -41,7 +45,6 @@ class VerticalScrollPage extends Component {
             ],
           })
         }
-
         resolve()
       }, 1000)
     })
@@ -76,4 +79,4 @@ class VerticalScrollPage extends Component {
   }
 }
 
-export default VerticalScrollPage
+export default PullDownScrollPage

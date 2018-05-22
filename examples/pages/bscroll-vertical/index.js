@@ -31,8 +31,7 @@ class VerticalScrollPage extends Component {
     return (
       <div>
         <div className="container">
-          <Scroll
-          >
+          <Scroll>
             <ul className="content">
               {this.state.listData.map((item, index) =>
                 (<li className="content-item"

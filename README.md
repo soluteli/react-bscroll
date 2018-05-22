@@ -52,8 +52,8 @@ render () {
 | click | Boolean | false| better-scroll 默认会阻止浏览器的原生 click 事件。当设置为 true，better-scroll 会派发一个 click 事件。但是自定义的 click 事件会阻止一些原生组件的行为，如 checkbox 的选中等，所以一旦滚动列表中有一些原生表单组件，推荐的做法是监听 tap 事件（*暂未实现tap*）或者 在需要click的原生Dom添加`orginEvent`类名 |   
 | scrollY | Boolean | true | 默认允许Y轴滚动 |
 | scrollX | Boolean | false | 默认阻止X轴滚动 |
-| bounce | Boolean | false | 默认回弹 |
-| disabled | Boolean | false | 默认不禁用 |
+| bounce | Boolean | true | 是否开启回弹 |
+| disabled | Boolean | false | 是否禁用 better-scroll |
 | stopPropagation | Boolean | false | 默认不阻止事件冒泡 |
 | scrollbar | Boolean | false | 默认显示滚动条，有fade消失的效果（默认值也可以设置为Obeject，*暂未实现*） |  
 | pullDownRefresh | Boolean or Object | Object | 这个配置用于做下拉刷新功能，当设置 Object 的时，可以配置更多的具体细节。[demo](https://soluteli.github.io/react-bscroll/#/vertical-scroll)，无此需求时请设置为false | 

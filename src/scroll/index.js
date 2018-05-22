@@ -100,7 +100,6 @@ class Scroll extends Component {
         top: `${this.pullDownInitTop}px`,
       },
       bubbleY: 0,
-      componentId: this.createScrollId()
     }
 
   }
@@ -126,13 +125,12 @@ class Scroll extends Component {
     this.scroll.stop()
     this.scroll.destroy()
     this.scroll = null;
-    this.a = null
-    this.b = null
+    clearTimeout(this.TimerA)
+    clearTimeout(this.TimerB)
   }
 
   initScroll() {
     let { probeType, click, startY, scrollY, scrollX, freeScroll, scrollbar, pullDownRefresh, pullUpLoad, preventDefaultException, eventPassthrough, bounce,stopPropagation } = this.props
-    let { componentId } = this.state;
     let _pullDownRefresh = typeof pullDownRefresh === 'object' ? {
       ...defaultPullDownRefresh,
       ...pullDownRefresh
@@ -158,7 +156,7 @@ class Scroll extends Component {
       bounce: bounce,
       stopPropagation:stopPropagation,
     }
-    let wrapper = document.querySelector('.scroll-' + componentId)
+    let wrapper = this.refs.$dom
     this.scroll = new BScroll(wrapper, this.options)
     this.initEvents()
   }
@@ -204,6 +202,7 @@ class Scroll extends Component {
 
       this.props.doPullDownFresh()
         .then(() => {
+          if (!this.scroll) { return }
           this.setState({
             pulling: false,
           })
@@ -248,7 +247,7 @@ class Scroll extends Component {
     let { stopTime = 600 } = this.options.pullDownRefresh
 
     return new Promise((resolve) => {
-      this.a = setTimeout(() => {
+      this.TimerA = setTimeout(() => {
         this.isRebounding = true
         this.scroll.finishPullDown()
         resolve()
@@ -257,7 +256,7 @@ class Scroll extends Component {
   }
 
   _afterPullDown() {
-    setTimeout(() => {
+    this.TimerB = setTimeout(() => {
       this.setState({
         beforePullDown: true,
         pullDownStyle: {
@@ -276,7 +275,7 @@ class Scroll extends Component {
       })
 
       this.props.pullUpLoadMoreData().then(() => {
-        if (!this.scroll) { return false };
+        if (!this.scroll) { return }
         this.setState({
           isPullUpLoad: false,
         })
@@ -362,9 +361,8 @@ class Scroll extends Component {
   }
 
   render() {
-    let { componentId } = this.state;
     return (
-      <div className={`b-wrapper scroll-${componentId}`}>
+      <div className="b-wrapper" ref="$dom">
         <div className="b-scroll-content">
           {this.props.children}
           {this.renderPullUpLoad()}

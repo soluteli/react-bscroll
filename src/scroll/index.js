@@ -36,12 +36,15 @@ class Scroll extends Component {
     scrollbar: true,
     pullDownRefresh: false,
     pullUpLoad: false,
+    bounce: true,
     preventDefaultException: {
       className: /(^|\s)originEvent(\s|$)/,
       tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|TABLE)$/,
     },
     eventPassthrough: '',
-    isPullUpTipHide: true
+    isPullUpTipHide: true,
+    disabled: false,
+    stopPropagation: true,
   }
 
   static propTypes = {
@@ -74,9 +77,12 @@ class Scroll extends Component {
     preventDefaultException: PropTypes.object,
     eventPassthrough: PropTypes.string,
     isPullUpTipHide: PropTypes.bool,
+    bounce: PropTypes.bool,
+    disabled: PropTypes.bool,
+    stopPropagation: PropTypes.bool,
   }
 
-  constructor (props, context) {
+  constructor(props, context) {
     super(props, context)
 
     this.scroll = null // scroll 实例
@@ -85,7 +91,7 @@ class Scroll extends Component {
     this.pulling = false
 
     this.pullDownInitTop = -50
-
+    
     this.state = {
       isPullUpLoad: false,
       beforePullDown: true,
@@ -93,33 +99,40 @@ class Scroll extends Component {
       pullDownStyle: {
         top: `${this.pullDownInitTop}px`,
       },
-      bubbleY: 0
+      bubbleY: 0,
+      componentId: this.createScrollId()
     }
 
   }
-
-  componentDidMount () {
+  createScrollId() {
+    return Math.random().toString(36).substr(3, 10);
+  }
+  componentDidMount() {
     this.initScroll()
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.children !== prevProps.children) {
       if (!this.state.pulling) {
         this.scroll.refresh()
       }
+      if (prevProps.disabled !== this.props.disabled) {
+        this.props.disabled ? this.scroll.disable() : this.scroll.enable();
+      }
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.scroll.stop()
-    this.scroll = null
+    this.scroll.destroy()
+    this.scroll = null;
     this.a = null
     this.b = null
   }
 
-  initScroll () {
-    let { probeType, click, startY, scrollY, scrollX, freeScroll, scrollbar, pullDownRefresh, pullUpLoad, preventDefaultException, eventPassthrough } = this.props
-
+  initScroll() {
+    let { probeType, click, startY, scrollY, scrollX, freeScroll, scrollbar, pullDownRefresh, pullUpLoad, preventDefaultException, eventPassthrough, bounce,stopPropagation } = this.props
+    let { componentId } = this.state;
     let _pullDownRefresh = typeof pullDownRefresh === 'object' ? {
       ...defaultPullDownRefresh,
       ...pullDownRefresh
@@ -138,19 +151,19 @@ class Scroll extends Component {
       freeScroll,
       scrollX,
       scrollbar,
-      pullDownRefresh : _pullDownRefresh,
+      pullDownRefresh: _pullDownRefresh,
       pullUpLoad: _pullUpLoad,
       preventDefaultException,
       eventPassthrough,
+      bounce: bounce,
+      stopPropagation:stopPropagation,
     }
-
-    let wrapper = document.querySelector('.b-wrapper')
-
+    let wrapper = document.querySelector('.scroll-' + componentId)
     this.scroll = new BScroll(wrapper, this.options)
     this.initEvents()
   }
 
-  initEvents () {
+  initEvents() {
     if (this.options.pullUpLoad) {
       this._initPullUpLoad()
     }
@@ -172,6 +185,9 @@ class Scroll extends Component {
         this.props.doScrollEnd(pos)
       })
     }
+    if (this.props.disabled) {
+      this.scroll.disable()
+    }
   }
 
 
@@ -179,7 +195,7 @@ class Scroll extends Component {
     return this.scroll
   }
 
-  _initPullDownRefresh () {
+  _initPullDownRefresh() {
     this.scroll.on('pullingDown', () => {
       this.setState({
         beforePullDown: false,
@@ -240,7 +256,7 @@ class Scroll extends Component {
     })
   }
 
-  _afterPullDown () {
+  _afterPullDown() {
     setTimeout(() => {
       this.setState({
         beforePullDown: true,
@@ -260,6 +276,7 @@ class Scroll extends Component {
       })
 
       this.props.pullUpLoadMoreData().then(() => {
+        if (!this.scroll) { return false };
         this.setState({
           isPullUpLoad: false,
         })
@@ -269,10 +286,10 @@ class Scroll extends Component {
     })
   }
 
-  renderPullUpLoad () {
+  renderPullUpLoad() {
     let { pullUpLoad, isPullUpTipHide } = this.props
 
-    if (pullUpLoad && isPullUpTipHide ) {
+    if (pullUpLoad && isPullUpTipHide) {
       return (
         <div className="b-pullup-wrapper">
           <div className="after-trigger" style={{ lineHeight: '.32rem' }}>
@@ -304,7 +321,7 @@ class Scroll extends Component {
     }
   }
 
-  renderPullUpDown () {
+  renderPullUpDown() {
     let { pullDownRefresh } = this.props
     let { beforePullDown, pulling, pullDownStyle } = this.state
 
@@ -344,9 +361,10 @@ class Scroll extends Component {
     }
   }
 
-  render () {
+  render() {
+    let { componentId } = this.state;
     return (
-      <div className="b-wrapper">
+      <div className={`b-wrapper scroll-${componentId}`}>
         <div className="b-scroll-content">
           {this.props.children}
           {this.renderPullUpLoad()}

@@ -5,6 +5,7 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom'
 import BScrollVertivalPage from './pages/bscroll-vertical/index'
 import BScrollPullupPage from './pages/bscroll-pullup/index'
 import BScrollPullDownPage from './pages/bscroll-pullDown/index'
+import BscrollMultiPage from './pages/bscroll-multi/index'
 
 class Home extends Component {
   render () {
@@ -19,6 +20,7 @@ class Home extends Component {
         <dd><Link to="/bscroll-vertical">01: react-scroll -- 简单案例</Link></dd>
         <dd><Link to="/bscroll-pullup">02: react-scroll -- 上拉加载</Link></dd>
         <dd><Link to="/bscroll-pullDown">03: react-scroll -- 下拉加载</Link></dd>
+        <dd><Link to="/multi">04: react-scroll -- 多个scroll</Link></dd>
       </dl>
     )
   }
@@ -37,6 +39,7 @@ class App extends Component {
           <Route path="/bscroll-vertical" component={BScrollVertivalPage}></Route>
           <Route path="/bscroll-pullup" component={BScrollPullupPage}></Route>
           <Route path="/bscroll-pullDown" component={BScrollPullDownPage}></Route>
+          <Route path="/multi" component={BscrollMultiPage}></Route>
         </div>
       </Router>
     )

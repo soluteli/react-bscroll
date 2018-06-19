@@ -1124,7 +1124,7 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-better-scroll@^1.3.0:
+better-scroll@^1.12.1:
   version "1.12.1"
   resolved "https://registry.npmjs.org/better-scroll/-/better-scroll-1.12.1.tgz#6b46b3fff84215342e21002a585089034ff584ac"
   dependencies:

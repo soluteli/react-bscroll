@@ -1125,8 +1125,8 @@ bcrypt-pbkdf@^1.0.0:
     tweetnacl "^0.14.3"
 
 better-scroll@^1.3.0:
-  version "1.3.0"
-  resolved "http://r.cnpmjs.org/better-scroll/download/better-scroll-1.3.0.tgz#091564d9074d13d16e46917a1d472e58fad26686"
+  version "1.12.1"
+  resolved "https://registry.npmjs.org/better-scroll/-/better-scroll-1.12.1.tgz#6b46b3fff84215342e21002a585089034ff584ac"
   dependencies:
     babel-runtime "^6.0.0"
 
@@ -1656,7 +1656,11 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "http://r.cnpmjs.org/core-js/download/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-core-js@^2.4.0, core-js@^2.5.0:
+core-js@^2.4.0:
+  version "2.5.7"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
+
+core-js@^2.5.0:
   version "2.5.1"
   resolved "http://r.cnpmjs.org/core-js/download/core-js-2.5.1.tgz#ae6874dc66937789b80754ff5428df66819ca50b"
 
@@ -5375,8 +5379,8 @@ regenerate@^1.2.1:
   resolved "http://r.cnpmjs.org/regenerate/download/regenerate-1.3.2.tgz#d1941c67bad437e1be76433add5b385f95b19260"
 
 regenerator-runtime@^0.11.0:
-  version "0.11.0"
-  resolved "http://r.cnpmjs.org/regenerator-runtime/download/regenerator-runtime-0.11.0.tgz#7e54fe5b5ccd5d6624ea6255c3473be090b802e1"
+  version "0.11.1"
+  resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
 
 regenerator-transform@0.9.11:
   version "0.9.11"
